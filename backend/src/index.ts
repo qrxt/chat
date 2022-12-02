@@ -3,6 +3,8 @@ import cors from "cors";
 import mongoose from "mongoose";
 import dotenv from "dotenv";
 
+import authRouteHandler from "./routes/auth";
+
 dotenv.config();
 
 const app = express();
@@ -10,8 +12,10 @@ app.use(express.json());
 app.use(cors());
 const port = process.env.port || 5000;
 
-app.get("/", (request, response) => {
-  response.send("Hello world!");
+app.use("/", authRouteHandler);
+
+app.get("/", (req, res) => {
+  res.send("hello");
 });
 
 mongoose
